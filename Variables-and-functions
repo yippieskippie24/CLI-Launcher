@@ -38,6 +38,7 @@ function directorycheck() {
 }
 
 function menu() {
+  clear
   #prints out the list of software available to run
   for i in "${!softwarenamearray[@]}"; do
     printf "%s\t%s\n" "$i" "${softwarenamearray[$i]}"

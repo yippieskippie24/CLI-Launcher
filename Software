@@ -7,6 +7,13 @@
 #softwaredescriptionarray = description of the software.  This is a description of the software.  It can be called later in the script.
 #needrootarray = defines if root is needed to run the software. It can be called later in the script.
 
+
+#softwarenamearray+=( "" )
+#softwarecmdarray+=( "" )
+#softwaredescriptionarray+=( "" )
+#needrootarray+=( "" )
+
+
 softwarenamearray+=( "Bandwidth Monitor" )
 softwarecmdarray+=( "bmon" )
 softwaredescriptionarray+=( 'Bandwidth monitor and rate estimator' )

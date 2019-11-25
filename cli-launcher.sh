@@ -20,19 +20,30 @@
 #                     Source files                        #
 #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
 
-source Variables.sh
-source Software.sh
+source Variables-and-functions.sh
+source Software
 
-echo $DIR
-echo ${softwarenamearray[*]}
-echo ${softwaredescriptionarray[*]}
-echo ${needrootarray[*]}
-echo /n
-echo "input a number"
-read index
 
-echo $index
+#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
+#                        Sandbox                          #
+#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
 
-echo ${softwarenamearray[$index]}
-echo ${softwaredescriptionarray[$index]}
-echo ${needrootarray[$index]}
+directorycheck
+
+menu
+
+#checks if sudo is needed for that software to run
+if [[ ${needrootarray[$index]} == 'yes' ]]; then
+    rootcheck
+fi
+
+
+##sleep 2
+#clears screen
+clear
+#run selected software (with sudo if needed)
+if [ $index == 'q' ]; then
+  exiterror="User quit the script"
+  EXIT
+else $SUDO ${softwarecmdarray[$index]}
+fi

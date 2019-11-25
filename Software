@@ -7,10 +7,17 @@
 #softwaredescriptionarray = description of the software.  This is a description of the software.  It can be called later in the script.
 #needrootarray = defines if root is needed to run the software. It can be called later in the script.
 
-softwarenamearray+=( "bmon" )
-softwaredescriptionarray+=( "Bandwidth monitor and rate estimator" )
+softwarenamearray+=( "Bandwidth Monitor" )
+softwarecmdarray+=( "bmon" )
+softwaredescriptionarray+=( 'Bandwidth monitor and rate estimator' )
 needrootarray+=( "no" )
 
-softwarenamearray+=( "iftop" )
+softwarenamearray+=( "Interface Top" )
+softwarecmdarray+=( "iftop" )
 softwaredescriptionarray+=( "Monitors network traffic and displays current bandwidth usage." )
+needrootarray+=( "yes" )
+
+softwarenamearray+=( "Nethogs" )
+softwarecmdarray+=( "nethogs" )
+softwaredescriptionarray+=( "Monitor Network Usage Per User" )
 needrootarray+=( "yes" )

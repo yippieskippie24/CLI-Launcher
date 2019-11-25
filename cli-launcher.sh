@@ -20,30 +20,25 @@
 #                     Source files                        #
 #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
 
-source Variables-and-functions.sh
+source Variables-and-functions
 source Software
 
+#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
+#                    Calling Functions                    #
+#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
+#calls the directory check function which validates that the "Software" file exists.
+directorycheck
+
+#calls the menu function which generates the menu and prompts for input
+menu
+
+#checks the software file to see if sudo is needed to run that software, if it is, it ensures that sudo (or root) has been used.
+#If not, it promopts the user for their sudo password.
+sudocheck
+
+#runs the software selected by the user
+run
 
 #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
 #                        Sandbox                          #
 #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
-
-directorycheck
-
-menu
-
-#checks if sudo is needed for that software to run
-if [[ ${needrootarray[$index]} == 'yes' ]]; then
-    rootcheck
-fi
-
-
-##sleep 2
-#clears screen
-clear
-#run selected software (with sudo if needed)
-if [ $index == 'q' ]; then
-  exiterror="User quit the script"
-  EXIT
-else $SUDO ${softwarecmdarray[$index]}
-fi

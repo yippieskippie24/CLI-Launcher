@@ -29,27 +29,6 @@ index=""
 #                       functions                         #
 #*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#*#
 
-
-function rootcheck() {
-## ROOT CHECK ##
-# Are we root? If not use sudo
-#This can be called for any command by running the "rootcheck" function.  Need to have the $SUDO appended before all commands to ensure sudo can be added if needed.
-if [[ $EUID -eq 0 ]];then
-    SUDO=""
-else
-    echo "Sudo will appended to the command."
-    # Check if it is actually installed
-    # If it isn't, exit because the install cannot complete
-    if [[ $(dpkg-query -s sudo) ]];then
-        export SUDO="sudo"
-    else
-        echo "Please install sudo or run this as root."
-        exit 1
-    fi
-fi
-}
-
-
 #Verify necessary files are present in the same directory as cli-launcher.sh
 function directorycheck() {
   if [ ! -f "$DIR/Software" ]; then
@@ -70,6 +49,39 @@ function menu() {
   echo "Which Program do you want to run?"
   #saves the users input to the $index variable
   read index
+}
+
+function sudocheck() {
+  if [[ ${needrootarray[$index]} == 'yes' ]]; then
+        # ROOT CHECK ##
+        # Are we root? If not use sudo
+        # Need to have the $SUDO appended before all commands to ensure sudo can be added if needed.
+        if [[ $EUID -eq 0 ]];then
+            SUDO=""
+        else
+            echo "Sudo will appended to the command."
+            # Check if it is actually installed
+            # If it isn't, exit because the install cannot complete
+            if [[ $(dpkg-query -s sudo) ]];then
+                export SUDO="sudo"
+            else
+                exiterror=$(echo "Please install sudo or run script as root.")
+                EXIT
+            fi
+        fi
+
+  fi
+}
+
+function run() {
+    clear
+      #run selected software (with sudo if needed)
+      if [ $index == 'q' ]; then
+        exiterror="User quit the script"
+        EXIT
+      else $SUDO ${softwarecmdarray[$index]}
+    fi
+
 }
 
 function EXIT() {

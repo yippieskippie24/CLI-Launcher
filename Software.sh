@@ -1,0 +1,16 @@
+#!/bin/bash
+
+#this page defines all of the software
+
+#each piece of software gets defined here.  There are three arrays that are used to log all information for each piece of software.
+#softwarenamearray = name of the software.  This name gets added into the array which can be called later in the script.
+#softwaredescriptionarray = description of the software.  This is a description of the software.  It can be called later in the script.
+#needrootarray = defines if root is needed to run the software. It can be called later in the script.
+
+softwarenamearray+=( "bmon" )
+softwaredescriptionarray+=( "Bandwidth monitor and rate estimator" )
+needrootarray+=( "no" )
+
+softwarenamearray+=( "iftop" )
+softwaredescriptionarray+=( "Monitors network traffic and displays current bandwidth usage." )
+needrootarray+=( "yes" )
